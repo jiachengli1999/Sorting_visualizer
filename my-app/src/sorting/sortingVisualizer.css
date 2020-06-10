@@ -1,0 +1,15 @@
+.container{
+    position: absolute;
+    top: 500px;
+    left:100px;
+}
+
+.bar{
+    display: inline-block;
+    width: 10px;
+    /* Make bars up right: */
+    vertical-align: bottom; 
+    text-align: center;
+    /* padding: 5px; */
+    margin: 0px 5px;
+}
