@@ -1,3 +1,4 @@
+import React from 'react'
 
 function BubbleSortAlgo(arr){
     // push 4 times

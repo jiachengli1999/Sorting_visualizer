@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import './sortingVisualizer.css'
 import BubbleSortAlgo from './BubbleSort.js'
+import SelectionSortAlgo from './SelectionSort.js'
 
 const ANIMATION_SPEED= 10
 const INITIAL_COLOR = 'pink'
@@ -16,6 +17,10 @@ class SortingVisualizer extends Component{
         })
         this.resetArr = this.resetArr.bind(this)
         this.BubbleSort = this.BubbleSort.bind(this)
+        this.InsertionSort = this.InsertionSort.bind(this)
+        this.SelectionSort = this.SelectionSort.bind(this)
+        this.QuickSort = this.QuickSort.bind(this)
+        this.MergeSort = this.MergeSort.bind(this)
     }
 
     componentDidMount(){
@@ -96,7 +101,72 @@ class SortingVisualizer extends Component{
     }
 
     SelectionSort(){
+        const animations = SelectionSortAlgo(this.state.arr)
+        const array_bars = document.getElementsByClassName('bar')
+        console.log(array_bars[0].style.height.slice(0,-2))
+        for (var i=0; i < animations.length; i++){
+            // if (animations[i][0] === -1) {continue}
+            // var changeColor = (i%5 === 0) || (i%5 === 1) || (i%5 === 2) || (i%5 === 4)
+            // if (changeColor){
+            //     const [barIndex1, barIndex2] = animations[i]
+            //     const color1 = (i%5 === 0) ? SUCCESS_COLOR : (i%5 === 1) ? SUCCESS_COLOR : 
+            //         (i%5 === 2) ? SWAP_COLOR : (i%5 === 4) ? DONE_COLOR : null
+            //     const color2 = (i%5 === 0) ? SUCCESS_COLOR : (i%5 === 1) ? INITIAL_COLOR : 
+            //         (i%5 === 2) ? SWAP_COLOR : (i%5 === 4) ? INITIAL_COLOR : null
+            //     setTimeout(()=>{
+            //         array_bars[barIndex1].style.backgroundColor = color1
+            //         array_bars[barIndex2].style.backgroundColor = color2
+            //     }, i*1000)
+            // }
+            // else { // i%5 === 3
+            //     const [barIndex1, newHeight1, barIndex2, newHeight2] = animations[i]
+            //     setTimeout(function(index1, h1, index2, h2){
+            //         array_bars[index1].style.height = `${h1}px`
+            //         array_bars[index1].innerHTML = h1
+            //         array_bars[index2].style.height = `${h2}px`
+            //         array_bars[index2].innerHTML = h2
+            //     }, i*ANIMATION_SPEED, barIndex1, newHeight1, barIndex2, newHeight2)
+            // }
 
+            const [barIndex1, barIndex2, order] = animations[i]
+            if (order !== '4th'){
+                const color1 = (order === '1st') ? SUCCESS_COLOR :
+                               (order === '2nd') ? SUCCESS_COLOR: 
+                               (order === '3rd') ? SWAP_COLOR :
+                               (order === '5th') ? DONE_COLOR: 'black'
+
+                const color2 = (order === '1st') ? SUCCESS_COLOR : 
+                               (order === '2nd') ? INITIAL_COLOR: 
+                               (order === '3rd') ? SWAP_COLOR :
+                               (order === '5th') ? INITIAL_COLOR: 'black'
+
+                setTimeout(()=>{
+                    array_bars[barIndex2].style.backgroundColor = color2
+                    array_bars[barIndex1].style.backgroundColor = color1
+                }, i * 10)
+            }
+            else{ //swap 
+                setTimeout(() =>{
+                     // get the height number for the bars
+                    const h1 = array_bars[barIndex1].style.height.slice(0, -2)
+                    const h2 = array_bars[barIndex2].style.height.slice(0, -2)
+                    // assign height 
+                    array_bars[barIndex1].style.height = `${h2}px`
+                    array_bars[barIndex1].innerHTML = h2
+                    array_bars[barIndex2].style.height = `${h1}px`
+                    array_bars[barIndex2].innerHTML = h1
+                }, i*10)
+            }
+            
+            // if (i%5 === 1){
+            //     const [barIndex1, barIndex2] = animations[i]
+            //     setTimeout(()=>{
+            //         array_bars[barIndex1].style.backgroundColor = SUCCESS_COLOR
+            //         array_bars[barIndex2].style.backgroundColor = INITIAL_COLOR
+            //     }, i * 500)
+            // }
+
+        }
     }
 
     QuickSort(){
