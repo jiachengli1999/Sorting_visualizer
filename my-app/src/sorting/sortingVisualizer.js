@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './sortingVisualizer.css'
 
-const ANIMATION_SPEED= 100
+const ANIMATION_SPEED= 10
 
 class SortingVisualizer extends Component{
     constructor(){
@@ -26,13 +26,10 @@ class SortingVisualizer extends Component{
     }
 
     BubbleSort(){
-        const length = this.state.arr.length
-        var res_arr = this.state.arr
         const array_bars = document.getElementsByClassName('bar')
         const animation = BubbleSortAlgo(this.state.arr)
         for (var i=0; i <animation.length; i++){
             var changeToGreen = (i%4===0) 
-
             if (animation[i][0] === -1){
                 continue;
             }
@@ -55,32 +52,38 @@ class SortingVisualizer extends Component{
             }
             else if (i%4 === 2){
                 const [barIndex1, newHeight1, barIndex2, newHeight2] = animation[i]
-                console.log('============')
-                console.log('index1/height1:', barIndex1,newHeight1)
-                console.log('index2/Height2:', barIndex2,newHeight2)
-
                 setTimeout(function(index1, height1, index2, height2){
                     array_bars[index1].style.height = `${height1}px`
                     array_bars[index1].innerHTML = height1
 
                     array_bars[index2].style.height = `${height2}px`
                     array_bars[index2].innerHTML = height2
+                    
                 }, i*ANIMATION_SPEED, barIndex1, newHeight1, barIndex2, newHeight2)
             }
-            else{ // i%4 == 3
+            else if(i%4 ===3){
                 const [barIndex1, barIndex2, end] = animation[i]
+                const color1 = 'pink'
+                const color2 = end ? 'purple' : 'pink'
                 setTimeout(function(index1, index2){
-                    if (end){
-                        array_bars[index1].style.backgroundColor = 'pink'
-                        array_bars[index2].style.backgroundColor = 'purple'
-                    }
-                    else{
-                        array_bars[index1].style.backgroundColor = 'green'
-                        array_bars[index2].style.backgroundColor = 'green'
-                    }
+                    array_bars[index1].style.backgroundColor = color1
+                    array_bars[index2].style.backgroundColor = color2
                 }, i*ANIMATION_SPEED, barIndex1, barIndex2)
             }
 
+            // after sorting
+            if (i === animation.length-1){
+                // make first column purple
+                setTimeout(()=>{
+                    array_bars[0].style.backgroundColor = 'purple'
+                }, i*ANIMATION_SPEED)
+                // make all columns green
+                setTimeout(() => {
+                    for (var i=0; i < array_bars.length; i++){
+                        array_bars[i].style.backgroundColor = 'green'
+                    }
+                }, i*ANIMATION_SPEED)
+            }
         }
 
     }
@@ -136,16 +139,19 @@ function BubbleSortAlgo(arr){
                 pairs.push([j, j+1])
                 // 3rd: change positions
                 pairs.push([j, temp2, j+1, temp])
-                // 4th: change color back to green if not end
-                pairs.push([j, j+1, end]) 
+                // 4th: change color back
+                pairs.push([j, j+1, end])
             }
             else{
                 // 2nd: no change 
-                pairs.push([-1, -1])
+                pairs.push([-1])
                 // 3rd: no change
-                pairs.push([-1, -1, -1, -1])
-                // 4th: no change
-                pairs.push([-1, -1, -1])
+                pairs.push([-1])
+                // 4th: change color if end
+                if (end) {
+                    pairs.push([j, j+1, end])
+                }
+                else{ pairs.push([-1])}
             }
         }
     }
