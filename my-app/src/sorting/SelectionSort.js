@@ -1,44 +1,56 @@
-import React from 'react'
+import SelectionSortAlgo from './SelectionSortAlgo.js'
 
-// using mod 2
-function SelectionSortAlgo(arr){
-    var animations = []
-    var res_arr = arr.slice()
-    console.log(res_arr)
-    for(var i=0; i < res_arr.length; i++){
-        var min_index = i
-        for (var j=i; j < res_arr.length; j++){
-            
-            // 1: set color to green for comparison
-            animations.push([i, j, '1st'])
-            // 2: reset color of index j to initial
-            animations.push([i, j, '2nd'])
-            if (res_arr[j] < res_arr[min_index]){
-                // set new min index
-                min_index = j
-            }
+const ANIMATION_SPEED= 10
+const INITIAL_COLOR = 'pink'
+const SUCCESS_COLOR = '#7FFFD4' // also iteration color
+const SWAP_COLOR = '#F08080'
+const DONE_COLOR = '#E6E6FA'
+
+export const SelectionSort = function() {
+    const animations = SelectionSortAlgo(this.state.arr)
+    const array_bars = document.getElementsByClassName('bar')
+
+    for (var i=0; i < animations.length; i++){
+        const [barIndex1, barIndex2, order] = animations[i]
+        if (order !== '4th'){
+            const color1 = (order === '1st') ? SUCCESS_COLOR :
+                            (order === '2nd') ? SUCCESS_COLOR: 
+                            (order === '3rd') ? SWAP_COLOR :
+                            (order === '5th') ? DONE_COLOR: 'black'
+
+            const color2 = (order === '1st') ? SUCCESS_COLOR : 
+                            (order === '2nd') ? INITIAL_COLOR: 
+                            (order === '3rd') ? SWAP_COLOR :
+                            (order === '5th') ? INITIAL_COLOR: 'black'
+
+            setTimeout(()=>{
+                array_bars[barIndex2].style.backgroundColor = color2
+                array_bars[barIndex1].style.backgroundColor = color1
+            }, i * ANIMATION_SPEED)
         }
-        // 1: Make red to indicate swapping
-        animations.push([i, min_index, '3rd'])
-        // 2: swap
-        animations.push([i, min_index, '4th'])
-        // 1: change color back to initial and set color in index i to DONE_COLOR
-        animations.push([i, min_index, '5th'])
-        // [res_arr[i], res_arr[min_index]] = [res_arr[min_index], res_arr[i]]
-        var temp = res_arr[i]
-        res_arr[i] = res_arr[min_index]
-        res_arr[min_index] = temp
+        else{ //swap 
+            const [idx1, h1, order, idx2, h2] = animations[i]
+            setTimeout(() =>{
+                // get the height number for the bars
+                // const h1 = array_bars[barIndex1].style.height.slice(0, -2)
+                // const h2 = array_bars[barIndex2].style.height.slice(0, -2)
+                // assign height 
+                array_bars[idx1].style.height = `${h1}px`
+                array_bars[idx1].innerHTML = h1
+                array_bars[idx2].style.height = `${h2}px`
+                array_bars[idx2].innerHTML = h2
+            }, i*ANIMATION_SPEED)
+        }
+        // after sorting
+        if (i === animations.length-1){
+            // make all columns green
+            setTimeout(() => {
+                for (var i=0; i < array_bars.length; i++){
+                    array_bars[i].style.backgroundColor = SUCCESS_COLOR
+                }
+            }, i*ANIMATION_SPEED)
+        }
     }
-    console.log(checkSorting(res_arr))
-    console.log(res_arr)
-    return animations
-}
-
-function checkSorting(arr){ 
-    for (var i=0; i < arr.length-1; i++){
-        if (arr[i] > arr[i+1]){ return false }
-    }
-    return true
-}
-
-export default SelectionSortAlgo
+    // set state to sorted array
+    // this.setState({arr: sorted_arr})
+};
