@@ -3,6 +3,7 @@ import './sortingVisualizer.css'
 import { SelectionSort } from './SelectionSort.js'
 import { BubbleSort } from './BubbleSort.js'
 import { InsertionSort } from './InsertionSort.js'
+import { QuickSort } from './QuickSort.js'
 
 const ANIMATION_SPEED= 10
 const INITIAL_COLOR = 'pink'
@@ -42,9 +43,7 @@ class SortingVisualizer extends Component{
 
     InsertionSort = InsertionSort.bind(this)
 
-    QuickSort(){
-
-    }
+    QuickSort = QuickSort.bind(this)
 
     MergeSort(){
 
