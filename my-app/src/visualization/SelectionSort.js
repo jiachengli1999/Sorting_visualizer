@@ -1,4 +1,4 @@
-import SelectionSortAlgo from './SelectionSortAlgo.js'
+import SelectionSortAlgo from './Algo/SelectionSortAlgo.js'
 
 const ANIMATION_SPEED= 10
 const INITIAL_COLOR = 'pink'
@@ -51,6 +51,4 @@ export const SelectionSort = function() {
             }, i*ANIMATION_SPEED)
         }
     }
-    // set state to sorted array
-    // this.setState({arr: sorted_arr})
 };

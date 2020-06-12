@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import './sortingVisualizer.css'
 import { SelectionSort } from './SelectionSort.js'
 import { BubbleSort } from './BubbleSort.js'
+import { InsertionSort } from './InsertionSort.js'
 
 const ANIMATION_SPEED= 10
 const INITIAL_COLOR = 'pink'
@@ -16,11 +17,6 @@ class SortingVisualizer extends Component{
             arr: [],
         })
         this.resetArr = this.resetArr.bind(this)
-        this.BubbleSort = this.BubbleSort.bind(this)
-        this.InsertionSort = this.InsertionSort.bind(this)
-        this.QuickSort = this.QuickSort.bind(this)
-        this.MergeSort = this.MergeSort.bind(this)
-
     }
 
     componentDidMount(){
@@ -42,11 +38,9 @@ class SortingVisualizer extends Component{
 
     BubbleSort = BubbleSort.bind(this)
 
-    InsertionSort(){
-
-    }
-
     SelectionSort = SelectionSort.bind(this)
+
+    InsertionSort = InsertionSort.bind(this)
 
     QuickSort(){
 
@@ -63,8 +57,8 @@ class SortingVisualizer extends Component{
                 <div className='button_section'>
                     <label onClick={this.resetArr}>Reset</label>
                     <label onClick={this.BubbleSort}>Bubble Sort</label>
-                    <label onClick={this.InsertionSort}>Insertion Sort</label>
                     <label onClick={this.SelectionSort}>Selection Sort</label>
+                    <label onClick={this.InsertionSort}>Insertion Sort</label>
                     <label onClick={this.QuickSort}>Quick Sort</label>
                     <label onClick={this.MergeSort}>Merge Sort</label>
                 </div>

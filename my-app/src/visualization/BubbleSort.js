@@ -1,4 +1,4 @@
-import BubbleSortAlgo from './BubbleSortAlgo.js'
+import BubbleSortAlgo from './Algo/BubbleSortAlgo.js'
 
 const ANIMATION_SPEED= 10
 const INITIAL_COLOR = 'pink'
