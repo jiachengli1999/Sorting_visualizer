@@ -43,3 +43,11 @@
     font-size: 20px;
 }
 
+.speed_container{
+    color: white;
+    padding: 8px;
+}
+
+.speed_input{
+    width: 50px;
+}

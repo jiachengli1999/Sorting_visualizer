@@ -34,7 +34,7 @@ export const QuickSort = function(){
                 console.log(barIndex1,barIndex2,'=========')
                 arr_bars[barIndex1].style.backgroundColor = color1
                 arr_bars[barIndex2].style.backgroundColor = color2
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
         else{ // swap
             const [order, barIndex1, h1, barIndex2, h2] = animations[i]
@@ -43,7 +43,7 @@ export const QuickSort = function(){
                 arr_bars[barIndex1].innerHTML = h1
                 arr_bars[barIndex2].style.height = `${h2}px`
                 arr_bars[barIndex2].innerHTML = h2
-            }, i *ANIMATION_SPEED)
+            }, i *this.state.ANIMATION_SPEED)
         }
         // after sorting
         if (i === animations.length-1){
@@ -53,7 +53,7 @@ export const QuickSort = function(){
                     arr_bars[i].style.backgroundColor = SUCCESS_COLOR
                 }
                 this.setState({disabled: false})
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
     }
 }

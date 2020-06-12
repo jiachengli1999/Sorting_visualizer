@@ -24,14 +24,14 @@ export const MergeSort = function(){
             setTimeout(()=>{
                 arr_bars[barIndex1].style.backgroundColor = color1
                 arr_bars[barIndex2].style.backgroundColor = color2
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
         else{ // set new height
             const [order, barIndex1, h1] = animations[i]
             setTimeout(()=>{
                 arr_bars[barIndex1].style.height = `${h1}px`
                 arr_bars[barIndex1].innerHTML = h1
-            }, i *ANIMATION_SPEED)
+            }, i *this.state.ANIMATION_SPEED)
         }
         // after sorting
         if (i === animations.length-1){
@@ -41,7 +41,7 @@ export const MergeSort = function(){
                     arr_bars[i].style.backgroundColor = SUCCESS_COLOR
                 }
                 this.setState({disabled: false})
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
     }
 }

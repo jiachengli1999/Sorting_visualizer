@@ -27,7 +27,7 @@ export const SelectionSort = function() {
             setTimeout(()=>{
                 array_bars[barIndex2].style.backgroundColor = color2
                 array_bars[barIndex1].style.backgroundColor = color1
-            }, i * ANIMATION_SPEED)
+            }, i * this.state.ANIMATION_SPEED)
         }
         else{ //swap 
             const [idx1, h1, order, idx2, h2] = animations[i]
@@ -40,7 +40,7 @@ export const SelectionSort = function() {
                 array_bars[idx1].innerHTML = h1
                 array_bars[idx2].style.height = `${h2}px`
                 array_bars[idx2].innerHTML = h2
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
         // after sorting
         if (i === animations.length-1){
@@ -50,7 +50,7 @@ export const SelectionSort = function() {
                     array_bars[i].style.backgroundColor = SUCCESS_COLOR
                 }
                 this.setState({disabled: false})
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
     }
 };

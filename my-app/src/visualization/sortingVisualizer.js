@@ -19,9 +19,11 @@ class SortingVisualizer extends Component{
             arr: [],
             disabled: false,
             title: 'Sorting Visualizer',
+            ANIMATION_SPEED: 10,
         })
         this.resetArr = this.resetArr.bind(this)
         this.handleClick = this.handleClick.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
 
     componentDidMount(){
@@ -57,6 +59,23 @@ class SortingVisualizer extends Component{
         }
     }
 
+    handleChange(e){
+        let val = e.target.value
+        var n = Math.floor(Number(val));
+        const is_int = n !== Infinity && String(n) === val && n >= 0;
+        const speed =  parseInt(val)
+        console.log(speed)
+        console.log('here1')
+        if (is_int){
+            console.log('here2')
+            if (speed >= 10 && speed <= 300){
+                console.log('here3')
+                this.setState({ANIMATION_SPEED: speed})
+            }
+        }
+
+    }
+
     BubbleSort = BubbleSort.bind(this)
 
     SelectionSort = SelectionSort.bind(this)
@@ -78,6 +97,12 @@ class SortingVisualizer extends Component{
                     <label onClick={this.handleClick} >Insertion Sort</label>
                     <label onClick={this.handleClick} >Quick Sort</label>
                     <label onClick={this.handleClick} >Merge Sort</label>
+                    <form className='speed_container'>
+                        Speed: <input type='text' onChange={this.handleChange} 
+                        disabled={this.state.disabled} 
+                        placeholder="10"
+                        className='speed_input'/> 300 (slow) ---{'>'} 10 (fast)
+                    </form>
                 </div>
                 <div className='container'>
                     <div className='title'><h1>{this.state.title}</h1></div>

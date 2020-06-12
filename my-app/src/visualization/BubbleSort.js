@@ -30,19 +30,19 @@ export const BubbleSort = function() {
                 if (reset){
                     array_bars[barIndex1-1].style.backgroundColor = INITIAL_COLOR
                 }
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
         else if (i%4 === 1){
             // const [barIndex1, barIndex2] = animation[i]
             // setTimeout(function(index1, index2){
             //     array_bars[index1].style.backgroundColor = SWAP_COLOR
             //     array_bars[index2].style.backgroundColor = SWAP_COLOR
-            // }, i*ANIMATION_SPEED, barIndex1, barIndex2)
+            // }, i*this.state.ANIMATION_SPEED, barIndex1, barIndex2)
             const [barIndex1, barIndex2] = animation[i]
             setTimeout(()=>{
                 array_bars[barIndex1].style.backgroundColor = SWAP_COLOR
                 array_bars[barIndex2].style.backgroundColor = SWAP_COLOR
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
         else if (i%4 === 2){
             // const [barIndex1, newHeight1, barIndex2, newHeight2] = animation[i]
@@ -53,7 +53,7 @@ export const BubbleSort = function() {
             //     array_bars[index2].style.height = `${height2}px`
             //     array_bars[index2].innerHTML = height2
                 
-            // }, i*ANIMATION_SPEED, barIndex1, newHeight1, barIndex2, newHeight2)
+            // }, i*this.state.ANIMATION_SPEED, barIndex1, newHeight1, barIndex2, newHeight2)
             const [barIndex1, newHeight1, barIndex2, newHeight2] = animation[i]
             setTimeout(()=>{
                 array_bars[barIndex1].style.height = `${newHeight1}px`
@@ -62,7 +62,7 @@ export const BubbleSort = function() {
                 array_bars[barIndex2].style.height = `${newHeight2}px`
                 array_bars[barIndex2].innerHTML = newHeight2
                 
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
         else if(i%4 ===3){
             // const [barIndex1, barIndex2, end] = animation[i]
@@ -71,14 +71,14 @@ export const BubbleSort = function() {
             // setTimeout(function(index1, index2){
             //     array_bars[index1].style.backgroundColor = color1
             //     array_bars[index2].style.backgroundColor = color2
-            // }, i*ANIMATION_SPEED, barIndex1, barIndex2)
+            // }, i*this.state.ANIMATION_SPEED, barIndex1, barIndex2)
             const [barIndex1, barIndex2, end] = animation[i]
             const color1 = INITIAL_COLOR
             const color2 = end ? DONE_COLOR : INITIAL_COLOR
             setTimeout(()=>{
                 array_bars[barIndex1].style.backgroundColor = color1
                 array_bars[barIndex2].style.backgroundColor = color2
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
 
         // after sorting
@@ -86,14 +86,14 @@ export const BubbleSort = function() {
             // make first column purple
             setTimeout(()=>{
                 array_bars[0].style.backgroundColor = DONE_COLOR
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
             // make all columns green
             setTimeout(() => {
                 for (var i=0; i < array_bars.length; i++){
                     array_bars[i].style.backgroundColor = SUCCESS_COLOR
                 }
                 this.setState({disabled: false})
-            }, i*ANIMATION_SPEED)
+            }, i*this.state.ANIMATION_SPEED)
         }
     }
 };
