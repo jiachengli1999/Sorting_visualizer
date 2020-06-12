@@ -7,6 +7,7 @@ const SWAP_COLOR = '#F08080'
 const DONE_COLOR = '#E6E6FA'
 
 export const InsertionSort = function(){
+    this.setState({title: 'Insertion Sort'})
     const animations = InsertionSortAlgo(this.state.arr)
     const arr_bars = document.getElementsByClassName('bar')
 
@@ -46,6 +47,7 @@ export const InsertionSort = function(){
                 for (var i=0; i < arr_bars.length; i++){
                     arr_bars[i].style.backgroundColor = SUCCESS_COLOR
                 }
+                this.setState({disabled: false})
             }, i*ANIMATION_SPEED)
         }
     }

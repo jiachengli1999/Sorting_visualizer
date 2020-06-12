@@ -7,6 +7,7 @@ const SWAP_COLOR = '#F08080'
 const DONE_COLOR = '#E6E6FA'
 
 export const BubbleSort = function() {
+    this.setState({title: 'Bubble Sort'})
     const array_bars = document.getElementsByClassName('bar')
     const animation = BubbleSortAlgo(this.state.arr)
     for (var i=0; i <animation.length; i++){
@@ -91,6 +92,7 @@ export const BubbleSort = function() {
                 for (var i=0; i < array_bars.length; i++){
                     array_bars[i].style.backgroundColor = SUCCESS_COLOR
                 }
+                this.setState({disabled: false})
             }, i*ANIMATION_SPEED)
         }
     }

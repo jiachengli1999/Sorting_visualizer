@@ -15,12 +15,13 @@
     float: left;
     padding: 10px 20px;    
 }
-
 .button_section label:hover{
     background-color: white;
     color: black;
     overflow: hidden;
 }
+
+
 .bar{
     display: inline-block;
     width: 20px;

@@ -1,7 +1,8 @@
 function MergeSortAlgo(arr){
     const animations = []
     const res_arr = arr.slice()
-    MergeSort(res_arr, 0, arr.length-1, arr, animations)
+    const res_arr_2 = arr.slice()
+    MergeSort(res_arr, 0, arr.length-1, res_arr_2, animations)
     console.log('sorted:',checkSorting(res_arr))
     return animations
 }

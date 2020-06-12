@@ -17,8 +17,11 @@ class SortingVisualizer extends Component{
         super()
         this.state = ({
             arr: [],
+            disabled: false,
+            title: 'Sorting Visualizer',
         })
         this.resetArr = this.resetArr.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount(){
@@ -26,6 +29,7 @@ class SortingVisualizer extends Component{
     }
 
     resetArr(){
+        this.setState({title: 'Sorting Visualizer'})
         const res = []
         for (var i =0; i <20; i++){
             res.push(getRandNum())
@@ -35,6 +39,21 @@ class SortingVisualizer extends Component{
         const array_bars = document.getElementsByClassName('bar')
         for (var i=0; i < array_bars.length; i++){
             array_bars[i].style.backgroundColor = INITIAL_COLOR
+        }
+        this.setState({disabled: false})
+    }
+
+    handleClick(e){
+        const val = e.target.innerHTML
+        if (!this.state.disabled){
+            // set disabled and run
+            this.setState({disabled: true})
+            if (val === 'Reset'){ return this.resetArr() }
+            else if (val === 'Bubble Sort'){ return this.BubbleSort()}
+            else if (val === 'Selection Sort'){ return this.SelectionSort()}
+            else if (val === 'Insertion Sort'){ return this.InsertionSort()}
+            else if (val === 'Quick Sort'){ return this.QuickSort()}
+            else if (val === 'Merge Sort'){ return this.MergeSort()}
         }
     }
 
@@ -53,15 +72,15 @@ class SortingVisualizer extends Component{
         return(
             <div>
                 <div className='button_section'>
-                    <label onClick={this.resetArr}>Reset</label>
-                    <label onClick={this.BubbleSort}>Bubble Sort</label>
-                    <label onClick={this.SelectionSort}>Selection Sort</label>
-                    <label onClick={this.InsertionSort}>Insertion Sort</label>
-                    <label onClick={this.QuickSort}>Quick Sort</label>
-                    <label onClick={this.MergeSort}>Merge Sort</label>
+                    <label onClick={this.handleClick} >Reset</label>
+                    <label onClick={this.handleClick} >Bubble Sort</label>
+                    <label onClick={this.handleClick} >Selection Sort</label>
+                    <label onClick={this.handleClick} >Insertion Sort</label>
+                    <label onClick={this.handleClick} >Quick Sort</label>
+                    <label onClick={this.handleClick} >Merge Sort</label>
                 </div>
                 <div className='container'>
-                    <div className='title'><h1>Sorting Visualizer</h1></div>
+                    <div className='title'><h1>{this.state.title}</h1></div>
                     <div className='graph_section'>
                         {this.state.arr.map((i, index) =>(
                             <div className='bar' key={index} 
