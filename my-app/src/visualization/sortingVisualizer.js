@@ -4,6 +4,7 @@ import { SelectionSort } from './SelectionSort.js'
 import { BubbleSort } from './BubbleSort.js'
 import { InsertionSort } from './InsertionSort.js'
 import { QuickSort } from './QuickSort.js'
+import { MergeSort } from './MergeSort.js'
 
 const ANIMATION_SPEED= 10
 const INITIAL_COLOR = 'pink'
@@ -45,9 +46,7 @@ class SortingVisualizer extends Component{
 
     QuickSort = QuickSort.bind(this)
 
-    MergeSort(){
-
-    }
+    MergeSort = MergeSort.bind(this)
 
 
     render(){
