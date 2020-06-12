@@ -1,41 +1,60 @@
 function MergeSortAlgo(arr){
-    const res_arr = MergeSort(arr)
+    const animations = []
+    const res_arr = arr.slice()
+    MergeSort(res_arr, 0, arr.length-1, arr, animations)
     console.log('sorted:',checkSorting(res_arr))
+    return animations
 }
 
-function MergeSort(arr){
-    if (arr.length === 1) {
-        return true
-    }
+function MergeSort(main_arr, start, end, arr, animations){
+  if (start === end){ 
+    return
+  }
+  const mid = Math.floor((start+end)/2)
+  MergeSort(arr, start, mid, main_arr, animations)
+  MergeSort(arr, mid+1, end, main_arr, animations)
 
-    const mid = Math.floor(arr.length/2)
-    const left = MergeSort(arr.slice(0, mid))
-    const right = MergeSort(arr.slice(mid))
+  let k = start
+  let i = start
+  let j = mid + 1
+  while (i <= mid && j <= end) {
+    // 1. get iteration color; green
+    animations.push(['1st', i, j])
+    // 2. reset; initial
+    animations.push(['2nd', i, j])
 
-    var res_arr = []
-    var i = 0
-    var j = 0
-    while (i < left.length && j < right.length){
-        if (left[i] < right[j]){
-            res_arr.push(left[i])
-            i++;
-        }
-        else{
-            res_arr.push(right[j])
-            j++;
-        }
-    }
-    // get any left over elem in one of the arrays
-    while(i < left.length){
-        res_arr.push(left[i])
-        i++;
-    }
-    while(j < right.length){
-        res_arr.push(right[i])
-        j++;
-    }
+    if (arr[i] <= arr[j]) {
+      // 3. set 
+      animations.push(['3rd', k, arr[i]])
+      
+      main_arr[k] = arr[i];
+      k++
+      i++
+    } else {
+      // 3. set 
+      animations.push(['3rd', k, arr[j]])
 
-    return res_arr
+      main_arr[k] = arr[j];
+      k++
+      j++
+    }
+  }
+  while (i <= mid) {
+    // 3. set 
+    animations.push(['3rd', k, arr[i]])
+
+    main_arr[k] = arr[i];
+    k++
+    i++
+  }
+  while (j <= end) {
+    // 3. set 
+    animations.push(['3rd', k, arr[j]])
+
+    main_arr[k] = arr[j];
+    k++
+    j++
+  }
 }
 
 function checkSorting(arr){ 
